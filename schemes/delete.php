@@ -1,0 +1,1 @@
+<?php require_once __DIR__."/../config/app.php";require_role("Admin LP2M");require_post_csrf();try{$pdo->prepare("DELETE FROM schemes WHERE id=?")->execute([(int)$_POST["id"]]);flash("success","Skema dihapus.");}catch(Throwable $e){flash("danger","Skema masih digunakan oleh proposal.");}redirect("index.php");

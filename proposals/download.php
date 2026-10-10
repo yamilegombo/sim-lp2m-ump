@@ -1,0 +1,2 @@
+<?php
+require_once __DIR__."/../config/app.php";require_login();$id=(int)($_GET["id"]??0);$st=$pdo->prepare("SELECT proposal_file FROM proposals WHERE id=?");$st->execute([$id]);$file=$st->fetchColumn();$path=__DIR__."/../uploads/proposals/".basename((string)$file);if(!$file||!is_file($path)){http_response_code(404);exit("File tidak ditemukan.");}header("Content-Type: application/pdf");header("Content-Disposition: inline; filename=proposal-".$id.".pdf");header("Content-Length: ".filesize($path));readfile($path);exit;

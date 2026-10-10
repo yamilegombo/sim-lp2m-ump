@@ -1,0 +1,1 @@
+<?php require_once __DIR__."/../config/app.php";require_role("Admin LP2M");require_post_csrf();try{$pdo->prepare("DELETE FROM periods WHERE id=?")->execute([(int)$_POST["id"]]);flash("success","Periode dihapus.");}catch(Throwable $e){flash("danger","Periode masih digunakan oleh proposal.");}redirect("index.php");
